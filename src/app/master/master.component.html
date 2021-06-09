@@ -1,0 +1,21 @@
+<mat-toolbar class="toolbar">
+  <span>Adventure Lab Browser</span>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="ngOnInit()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-list role="list">
+  <ng-container *ngFor="let adventure of adventures">
+    <mat-list-item role="listitem" (click)="onClick(adventure['Id'])">
+      <span *ngIf="this.helperService.isNew(adventure['PublishedUtc'])">
+        <mat-icon class="green-icon">fiber_new</mat-icon>
+      </span>
+      <span>{{adventure['Title']}}</span>
+      <span class="spacer"></span>
+      <span class="distance">{{(this.helperService.getFormattedDistance(this.latitude, this.longitude, adventure['Location']['Latitude'], adventure['Location']['Longitude']))}}</span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </ng-container>
+</mat-list>

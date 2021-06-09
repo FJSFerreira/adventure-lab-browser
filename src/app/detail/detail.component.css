@@ -1,0 +1,30 @@
+.toolbar {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #02874D;
+    color: white;
+}
+
+.mat-card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.mat-image-container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+}
+
+.mat-card-image {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.title {
+    color: #02874D;
+    font-weight: bold;
+}

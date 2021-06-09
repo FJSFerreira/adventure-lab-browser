@@ -1,0 +1,49 @@
+<mat-toolbar class="toolbar">
+  <button mat-icon-button (click)="master()">
+    <mat-icon>keyboard_backspace</mat-icon>
+  </button>
+  <span>{{adventure['Title']}}</span>
+</mat-toolbar>
+
+<mat-card>
+  <mat-card-content class="mat-image-container">
+    <img class="mat-card-image" src="{{adventure['KeyImageUrl']}}" alt="{{adventure['Title']}}" />
+  </mat-card-content>
+  <mat-card-content>
+    <p>{{adventure['Description']}}</p>
+  </mat-card-content>
+  <mat-card-content>
+    <span class="title">Owner: </span><span>{{adventure['OwnerUsername']}}</span>
+  </mat-card-content>
+  <mat-card-content>
+    <span class="title">Linear: </span><span>{{this.helperService.localizeBoolean(adventure['isLinear'])}}</span>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="navigate(adventure['DeepLink'])">ABRIR</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let location of adventure['GeocacheSummaries']">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{location['Title']}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card>
+      <mat-card-content class="mat-image-container">
+        <img class="mat-card-image" src="{{location['KeyImageUrl']}}" alt="{{location['Title']}}" />
+      </mat-card-content>
+      <mat-card-content>{{location['Description']}}</mat-card-content>
+      <mat-card-content>
+        <span *ngIf="location['Question'] != null" class="title">Pergunta: </span><span>{{location['Question']}}</span>
+      </mat-card-content>
+      <mat-card-content *ngIf="location['CompletionAwardMessage'] != null">
+        <span class="title">Mensagem: </span><span>{{location['CompletionAwardMessage']}}</span>
+      </mat-card-content>
+      <mat-card-content>
+        <button mat-raised-button (click)="navigate('https://www.google.com/maps/place/'+location['Location']['Latitude']+','+location['Location']['Longitude'])">ABRIR NO GOOGLE MAPS</button>
+      </mat-card-content>
+    </mat-card>
+  </mat-expansion-panel>
+</mat-accordion>
